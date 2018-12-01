@@ -1,40 +1,31 @@
 #ifndef SPELL_H
 #define SPELL_H
 
-#include <Card.h>
+#include "../include/Spell.h"
+#include "../include/Monster.h"
+#include <string>
 
+using namespace std;
 
 class Spell : public Card
 {
     public:
-        Spell(unsigned int id, string name, int attack, int manaCost, string description, bool freeze, bool aoe);
-        /** Default constructor */
         Spell();
-        /** Default destructor */
+        Spell(unsigned int id, string name, int attack, int manaCost, string description, bool freeze, bool aoe);
         virtual ~Spell();
 
-        /** Access freeze
-         * \return The current value of freeze
-         */
-        bool GetFreeze();
-        /** Set freeze
-         * \param val New value to set
-         */
-        void SetFreeze(bool val);
-        /** Access aoe
-         * \return The current value of aoe
-         */
         bool GetAoe();
-        /** Set aoe
-         * \param val New value to set
-         */
-        void SetAoe(bool val);
+        bool GetFreeze();
 
-    protected:
+        void SetFreeze(bool val);
+        void SetAoe(bool val);
+        string ToStream();
+
+        void DealDMG(Monster);
 
     private:
-        bool freeze; //!< Member variable "freeze"
-        bool aoe; //!< Member variable "aoe"
+        bool freeze;    //!< Member variable "freeze"
+        bool aoe;       //!< Member variable "aoe"
 };
 
 #endif // SPELL_H

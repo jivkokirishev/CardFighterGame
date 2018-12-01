@@ -1,15 +1,14 @@
-#include "Monster.h"
+#include "../include/Monster.h"
 
 Monster::Monster()
 {
     //ctor
 }
-
 Monster::Monster(unsigned int id, string name, int attack, int manaCost, string description, int healthPoints, int charges)
-    : Card(id, CardType::MONSTER, name, attack, manaCost, description)
+    : Card(id, name, attack, manaCost, description)
 {
-    this->healthPoints = healthPoints;
-    this->charges = charges;
+    this -> healthPoints = healthPoints;
+    this -> charges = charges;
 }
 
 Monster::~Monster()
@@ -21,30 +20,30 @@ int Monster::GetHealthPoints()
 {
     return healthPoints;
 }
-/** Set healthPoints
- * \param val New value to set
- */
+int Monster::GetCharges()
+{
+    return charges;
+}
+
+void Monster::SetCharges(int val)
+{
+    charges = val;
+}
 void Monster::SetHealthPoints(int val)
 {
     healthPoints = val;
 }
 
-void Monster::DealDamage(int val)
+void Monster::DealDMG(Monster enemy)
 {
-    healthPoints -= val;
+    enemy.SetHealthPoints(enemy.GetHealthPoints() - (this -> GetAttack()));
 }
 
-/** Access charges
- * \return The current value of charges
- */
-int Monster::GetCharges()
+string Monster::ToStream()
 {
-    return charges;
-}
-/** Set charges
- * \param val New value to set
- */
-void Monster::SetCharges(int val)
-{
-    charges = val;
+    return (string)(this -> GetName() + ", "
+                    + to_string(this -> GetAttack()) + ", "
+                    + to_string(this -> GetHealthPoints()) + ", "
+                    + to_string(this -> GetManaCost())
+    );
 }

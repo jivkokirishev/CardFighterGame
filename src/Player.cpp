@@ -5,44 +5,30 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Player.h"
-#include "Card.h"
+#include "../include/Player.h"
+#include "../include/Card.h"
 using namespace std;
-//class Player{
 
-/*private:
-    string name;
-    std::vector<Card> hand;
-    std::stack<Card> deck;
-    int healthPoints;
-    std::vector<Card> board;
-*/
-static int Player::randNum(int min, int max)
-{
-    return rand() % max + min;
-}
-//public:
 Player::Player()
 {
-    this->healthPoints = 40;
+    this -> healthPoints = 40;
 }
 
 Player::~Player() {	}
 
-//moje da e v konstruktor
 void Player::set_name(string name)
 {
-    this->name = name;
+    this -> name = name;
 }
 
-void Player::set_shuffle_deck(std::vector<Card> dek)
+void Player::set_shuffle_deck(std::vector<Card> deck)
 {
     srand(time(0));
-    while(dek.size)
+    while(deck.size())
     {
-        int rnum = randNum(0, dek.size);
-        deck.push(dek[rnum]);
-        dek.erase(dek.begin() + rnum);
+        int rnum = rand() % (deck.size() + 1);
+        deck.push_back(deck[rnum]);
+        deck.erase(deck.begin() + rnum);
     }
 }
 
@@ -54,38 +40,38 @@ void Player::draw()
         deck.pop();
     }
     else
-        setHP(-2);// - neshto
+        setHP(-2);
 }
 
 bool Player::setHP(int value)
 {
-    if(this->healthPoints+value>0)
+    if(this -> healthPoints + value > 0)
     {
-        this->healthPoints += value;
+        this -> healthPoints += value;
         return true;
     }
     else
-        return false;//throw exception
+        return false;
 }
 
 string Player::get_name()
 {
-    return this->name;
+    return this -> name;
 }
 
 int Player::get_HP()
 {
-    return this->healthPoints;
+    return this -> healthPoints;
 }
 
 std::vector<Card> Player::getHand()
 {
-    return this->hand;
+    return this -> hand;
 }
 
 std::vector<Card> Player::getBoard()
 {
-    return this->board;
+    return this -> board;
 }
 //};
 /*int main()

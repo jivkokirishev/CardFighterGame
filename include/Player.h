@@ -10,34 +10,25 @@ using namespace std;
 class Player{
 public:
     Player();
-
     virtual ~Player();
 
+    bool setHP(int value);
     void set_name(string name);
+    void set_shuffle_deck(std::vector<Card> deck);
 
-    void set_shuffle_deck(std::vector<Card> dek);
+    string get_name();
+    int get_HP();
+    std::vector<Card> getHand();
+    std::vector<Card> getBoard();
 
     void draw();
 
-    bool setHP(int value);
-
-    string get_name();
-
-    int get_HP();
-
-    std::vector<Card> getHand();
-
-    std::vector<Card> getBoard();
-
 private:
     string name;
-    std::vector<Card> hand;
-    std::stack<Card> deck;
+    vector<Card> hand;
+    stack<Card> deck;
     int healthPoints;
-    std::vector<Card> board;
-
-	static int randNum(int min, int max);
-
+    vector<Card> board;
 };
 
 #endif

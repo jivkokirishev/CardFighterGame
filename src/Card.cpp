@@ -1,12 +1,11 @@
-#include "Card.h"
+#include "../include/Card.h"
 
-Card::Card(unsigned int id, CardType type, string name, int attack, int manaCost, string description)
+Card::Card(unsigned int id, string name, int attack, int manaCost, string description)
 {
-    this->id = id;
-    this->type = type;
-    this->name = name;
-    this->attack = attack;
-    this->mana_cost = manaCost;
+    this -> id = id;
+    this -> name = name;
+    this -> attack = attack;
+    this -> mana_cost = manaCost;
 }
 
 Card::Card()
@@ -67,14 +66,4 @@ string Card::GetDescription()
 void Card::SetDescription(string val)
 {
     description = val;
-}
-
-CardType Card::GetType()
-{
-    return type;
-}
-
-void Card::SetType(CardType val)
-{
-    type = val;
 }
