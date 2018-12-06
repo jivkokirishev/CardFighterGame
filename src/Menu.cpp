@@ -15,6 +15,16 @@ Hero Menu::createHero(string name)
     return *temp;
 }
 
+void Menu::setStart(bool start)
+{
+    this -> startBattle = start;
+}
+
+void Menu::setEnd(bool ending)
+{
+    this -> endGame = ending;
+}
+
 bool Menu::getStart()
 {
     return this -> startBattle;
@@ -65,6 +75,11 @@ void Menu::getCommand()
     {
         int command;
         cin >> command;
+        while (!cin.good())
+        {
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+        }
         this -> menuLayers = command;
     }
     if (this -> menuLayers < 0 && this -> menuLayers > 4)
@@ -88,7 +103,20 @@ void Menu::proceed(vector<Hero>* heroList)
 
         case 2:
             checkIfExist = true;
-            cin >> this -> name;
+            do
+            {
+                this -> name = "";
+                cin.ignore();
+                getline(cin, this -> name);
+                if (this -> name.size() > 20)
+                {
+                    cout << "You are trying to enter a name with more than 20 characters!" << endl;
+                    Sleep(SLEEP_TIME);
+                    system("cls");
+                    cout << "Enter a Name: ";
+                }
+            }
+            while (this -> name.size() < 0 || this -> name.size() > 20);
             for (unsigned i = 0; i < heroList -> size(); i++)
             {
                 if (name == heroList -> at(i).getName())
@@ -105,10 +133,23 @@ void Menu::proceed(vector<Hero>* heroList)
 
         case 3:
             checkIfExist = false;
-            cin >> this -> name;
+            do
+            {
+                this -> name = "";
+                cin.ignore();
+                getline(cin, this -> name);
+                if (this -> name.size() > 20)
+                {
+                    cout << "You are trying to enter a name with more than 20 characters!" << endl;
+                    Sleep(SLEEP_TIME);
+                    system("cls");
+                    cout << "Enter a Name of a Hero: ";
+                }
+            }
+            while (this -> name.size() < 0 || this -> name.size() > 20);
             for (unsigned i = 0; i < heroList -> size(); i++)
             {
-                if (name == heroList -> at(i).getName())
+                if (this -> name == heroList -> at(i).getName())
                 {
                     this -> index = i;
                     checkIfExist = true;
@@ -132,11 +173,7 @@ void Menu::proceed(vector<Hero>* heroList)
 
         case 5:
             cin >> this -> name;
-            cout << "Error!" << endl;
-            cout << heroList -> at(this -> index).getName() << endl;
-            cout << "Error!" << endl;
             heroList -> at(index).createDeck(name);
-            cout << "Error!" << endl;
             Sleep(SLEEP_TIME);
             this -> menuLayers = 0;
             break;
