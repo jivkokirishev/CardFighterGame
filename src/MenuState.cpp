@@ -20,6 +20,8 @@ vector<Hero> MenuState::getHeroList()
 
 int MenuState::menuLoop()
 {
+    this -> gameMenu.setEnd(false);
+    this -> gameMenu.setStart(false);
     while (!gameMenu.getEnd() && !gameMenu.getStart())
     {
         gameMenu.showMenu();
