@@ -33,84 +33,89 @@ void GameEngine::stateManager()
                 this -> heroList = menu.getHeroList();
                 break;
             case 2:
-                preCheck = false, check = false;
-                do
+                if (this -> heroList.size() < 2)
                 {
-                    system("cls");
-                    cout << "Enter Hero One: ";
-                    cin >> nameOfHero;
+                    cout << "You cannot start game with less than 2 Heroes!" << endl;
                     Sleep(SLEEP_TIME);
-                    for (unsigned i = 0; i < this -> heroList.size() || !preCheck; i++)
+                }
+                else
+                {
+                    preCheck = false, check = false;
+                    do
                     {
-                        if (nameOfHero == this -> heroList.at(i).getName())
+                        system("cls");
+                        cout << "Enter Hero One: ";
+                        cin >> nameOfHero;
+                        Sleep(SLEEP_TIME);
+                        for (unsigned i = 0; i < this -> heroList.size() || !preCheck; i++)
                         {
-                            hOne = (this -> heroList.at(i));
-                            system("cls");
-                            cout << "Enter Name of a Deck: ";
-                            cin >> nameOfDeck;
-                            Sleep(SLEEP_TIME);
-                            for (unsigned j = 0; j < this -> heroList.at(i).getDecks().size() || !preCheck; j++)
+                            if (nameOfHero == this -> heroList.at(i).getName())
                             {
-                                if(nameOfDeck == this -> heroList.at(i).getDecks().at(j).getName())
+                                hOne = (this -> heroList.at(i));
+                                system("cls");
+                                cout << "Enter Name of a Deck: ";
+                                cin >> nameOfDeck;
+                                Sleep(SLEEP_TIME);
+                                for (unsigned j = 0; j < this -> heroList.at(i).getDecks().size() || !preCheck; j++)
                                 {
-                                    indexOne = j;
-                                    preCheck = true;
+                                    if(nameOfDeck == this -> heroList.at(i).getDecks().at(j).getName())
+                                    {
+                                        indexOne = j;
+                                        preCheck = true;
+                                    }
                                 }
                             }
                         }
+                        if(!preCheck)
+                        {
+                            system("cls");
+                            cout << "There is not  such a Hero or Deck: ";
+                            Sleep(SLEEP_TIME);
+                        }
                     }
-                    if(!preCheck)
+                    while(!preCheck);
+                    do
                     {
                         system("cls");
-                        cout << "There is not  such a Hero or Deck: ";
+                        cout << "Enter Hero Two: ";
+                        cin >> nameOfHero;
                         Sleep(SLEEP_TIME);
-                    }
-                }
-                while(!preCheck);
-                do
-                {
-                    system("cls");
-                    cout << "Enter Hero Two: ";
-                    cin >> nameOfHero;
-                    Sleep(SLEEP_TIME);
-                    for (unsigned i = 0; i < this -> heroList.size() || !check; i++)
-                    {
-                        if (nameOfHero == this -> heroList.at(i).getName())
+                        for (unsigned i = 0; i < this -> heroList.size() || !check; i++)
                         {
-                            hTwo = (this -> heroList.at(i));
-                            system("cls");
-                            cout << "Enter Name of a Deck: ";
-                            cin >> nameOfDeck;
-                            Sleep(SLEEP_TIME);
-                            for (unsigned j = 0; j < this -> heroList.at(i).getDecks().size() || !check; j++)
+                            if (nameOfHero == this -> heroList.at(i).getName())
                             {
-                                if(nameOfDeck == this -> heroList.at(i).getDecks().at(j).getName())
+                                hTwo = (this -> heroList.at(i));
+                                system("cls");
+                                cout << "Enter Name of a Deck: ";
+                                cin >> nameOfDeck;
+                                Sleep(SLEEP_TIME);
+                                for (unsigned j = 0; j < this -> heroList.at(i).getDecks().size() || !check; j++)
                                 {
-                                    indexTwo = j;
-                                    check = true;
+                                    if(nameOfDeck == this -> heroList.at(i).getDecks().at(j).getName())
+                                    {
+                                        indexTwo = j;
+                                        check = true;
+                                    }
                                 }
                             }
                         }
+                        if(!check)
+                        {
+                            system("cls");
+                            cout << "There is not  such a Hero or Deck" << endl;
+                            Sleep(SLEEP_TIME);
+                        }
+                        else if (hOne.getName() == hTwo.getName())
+                        {
+                            system("cls");
+                            cout << "You cannot select two identical Heroes!";
+                            Sleep(SLEEP_TIME);
+                        }
                     }
-                    if(!check)
-                    {
-                        system("cls");
-                        cout << "There is not  such a Hero or Deck" << endl;
-                        Sleep(SLEEP_TIME);
-                    }
-                    else if (hOne.getName() == hTwo.getName())
-                    {
-                        system("cls");
-                        cout << "You cannot select two identical Heroes!";
-                        Sleep(SLEEP_TIME);
-                    }
+                    while(!check || (hOne.getName() == hTwo.getName()));
+                    this -> battle.gameLoop(hOne, indexOne, hTwo, indexTwo);
                 }
-                while(!check || (hOne.getName() == hTwo.getName()));
-                /**cout << "Error: " << (this -> heroList.size()) << endl;
-                hOne = (this -> heroList.at(0));
-                hTwo = (this -> heroList.at(1));
-                cout << "Error" << endl;*/
-                this -> battle.gameLoop(hOne, indexOne, hTwo, indexTwo);
+                this -> setState(1);
                 break;
             default:
                 system("cls");
@@ -121,3 +126,4 @@ void GameEngine::stateManager()
         }
     }
 }
+
