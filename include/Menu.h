@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#define SLEEP_TIME 500
+#define SLEEP_TIME 250
 #include <string>
 #include <vector>
 #include <iostream>
@@ -23,6 +23,9 @@ class Menu
         Hero createHero(string);
     public:
         Menu();
+
+        void setStart(bool);
+        void setEnd(bool);
 
         bool getStart();
         bool getEnd();
