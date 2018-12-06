@@ -4,8 +4,8 @@ Monster::Monster()
 {
     //ctor
 }
-Monster::Monster(unsigned int id, string name, int attack, int manaCost, string description, int healthPoints, int charges)
-    : Card(id, name, attack, manaCost, description)
+Monster::Monster(string name, int attack, int manaCost, string description, int healthPoints, int charges)
+    : Card(name, attack, manaCost, description)
 {
     this -> healthPoints = healthPoints;
     this -> charges = charges;
@@ -34,16 +34,11 @@ void Monster::SetHealthPoints(int val)
     healthPoints = val;
 }
 
-void Monster::DealDMG(Monster enemy)
-{
-    enemy.SetHealthPoints(enemy.GetHealthPoints() - (this -> GetAttack()));
-}
-
 string Monster::ToStream()
 {
     return (string)(this -> GetName() + ", "
-                    + to_string(this -> GetAttack()) + ", "
-                    + to_string(this -> GetHealthPoints()) + ", "
+                    + to_string(this -> GetAttack()) + " Att. , "
+                    + to_string(this -> GetHealthPoints()) + "HP , Mana Cost: "
                     + to_string(this -> GetManaCost())
     );
 }

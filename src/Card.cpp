@@ -1,11 +1,12 @@
 #include "../include/Card.h"
 
-Card::Card(unsigned int id, string name, int attack, int manaCost, string description)
+Card::Card(string name, int attack, int manaCost, string description)
 {
-    this -> id = id;
+    this -> id = ++(this -> cardCounter);
     this -> name = name;
     this -> attack = attack;
     this -> mana_cost = manaCost;
+    this -> description = description;
 }
 
 Card::Card()
@@ -60,10 +61,27 @@ void Card::SetManaCost(int val)
 
 string Card::GetDescription()
 {
-    return description;
+    return this -> description;
 }
 
 void Card::SetDescription(string val)
 {
     description = val;
 }
+
+string Card::ToStream()
+{
+    return "invalid";
+}
+
+void Card::SetHealthPoints(int i)
+{
+
+}
+
+int Card::GetHealthPoints()
+{
+    return 1;
+}
+
+int Card::cardCounter = 0;

@@ -1,23 +1,39 @@
-#include <iostream>
-//#include <Card.h>
-#include <Spell.h>
-#include <Monster.h>
-#include <cstring>
-
-using namespace std;
-
+#include "include/GameEngine.h"
 int main()
 {
-    string name = "Killer";
-    string desc = "Something";
-    Card *card = new Monster(0, name, 4, 5, desc, 10, 1);
-    if(card->GetType() == CardType::MONSTER)
+
+    /** MenuState TEST
+
+        Hero test;
+        test.setName("test");
+
+        vector<Hero> testList;
+        testList.push_back(test);
+
+        MenuState testMenuState;
+        testMenuState.setHeroList(testList);
+        int a = testMenuState.menuLoop();
+        cout << a;
+    **/
+
+    /** CardList TEST
+    CardList cards;
+    vector<Card*> listCards;
+    listCards = cards.loadCardList();
+    //cout << "Done: 1" << endl;
+    //cout << listCards.size() << endl;
+    //cout << listCards.at(0).ToStream() << endl;
+    for (unsigned i = 0; i < listCards.size(); i++)
     {
-        Monster *mn = dynamic_cast<Monster*>(card);
-        mn->DealDamage(2);
-        cout << mn->GetHealthPoints()<< endl;
-        cout << mn->GetManaCost() << endl;
+        ///cout << "Done: 2" << endl;
+        cout << listCards.at(i) -> ToStream() << endl;
     }
-    cout << card->GetAttack() << endl;
-    return 0;
+    //cout << "Done: 3" << endl;
+    **/
+
+    /** GameEngine TEST*/
+    GameEngine cardGame;
+    cardGame.stateManager();
+
 }
+

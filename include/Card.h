@@ -1,9 +1,8 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include "CardType.h"
 #include <string>
-
+#include <vector>
 
 using namespace std;
 
@@ -11,11 +10,12 @@ class Card
 {
     public:
         Card();
-        Card(unsigned int id, string name, int attack, int manaCost, string description);
+        Card(string name, int attack, int manaCost, string description);
         virtual ~Card();
 
         virtual string ToStream();
-        virtual void DealDMG(Card);
+        virtual void SetHealthPoints(int);
+        virtual int GetHealthPoints();
 
         unsigned int GetId();
         string GetName();
@@ -30,6 +30,7 @@ class Card
         void SetName(string val);
 
     private:
+        static int cardCounter;
         unsigned int id;        //!< Member variable "id"
         string name;            //!< Member variable "name"
         int attack;             //!< Member variable "attack"

@@ -5,8 +5,8 @@ Spell::Spell()
     //ctor
 }
 
-Spell::Spell(unsigned int id, string name, int attack, int manaCost, string description, bool freeze, bool aoe)
-    : Card(id, name, attack, manaCost, description)
+Spell::Spell(string name, int attack, int manaCost, string description, bool freeze, bool aoe)
+    : Card(name, attack, manaCost, description)
 {
     this -> freeze = freeze;
     this -> aoe = aoe;
@@ -36,16 +36,10 @@ void Spell::SetAoe(bool val)
     aoe = val;
 }
 
-void Spell::DealDMG(Monster enemy)
-{
-    enemy.SetHealthPoints(enemy.GetHealthPoints() - (this -> GetAttack()));
-    if (this -> freeze) enemy.SetCharges(0);
-}
-
 string Spell::ToStream()
 {
     return (string)(this -> GetName() + ", "
-                    + to_string(this -> GetAttack()) + ", "
+                    + to_string(this -> GetAttack()) + " DMG, Mana Cost: "
                     + to_string(this -> GetManaCost()) + ", "
                     + this -> GetDescription()
     );

@@ -11,7 +11,7 @@ class Spell : public Card
 {
     public:
         Spell();
-        Spell(unsigned int id, string name, int attack, int manaCost, string description, bool freeze, bool aoe);
+        Spell(string name, int attack, int manaCost, string description, bool freeze, bool aoe);
         virtual ~Spell();
 
         bool GetAoe();
@@ -20,8 +20,6 @@ class Spell : public Card
         void SetFreeze(bool val);
         void SetAoe(bool val);
         string ToStream();
-
-        void DealDMG(Monster);
 
     private:
         bool freeze;    //!< Member variable "freeze"

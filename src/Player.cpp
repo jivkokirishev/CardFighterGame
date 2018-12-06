@@ -1,12 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <stack>
-#include <cstring>
-#include <cstdlib>
-#include <ctime>
-
 #include "../include/Player.h"
-#include "../include/Card.h"
 using namespace std;
 
 Player::Player()
@@ -21,14 +13,19 @@ void Player::set_name(string name)
     this -> name = name;
 }
 
-void Player::set_shuffle_deck(std::vector<Card> deck)
+void Player::set_shuffle_deck(DeckStructure shuffleDeck)
 {
+    CardList* cards = new CardList;
+    vector<int> tempDeck = shuffleDeck.getDeck();
+    vector<Card*> cardIndexes = cards -> loadCardList();
+
     srand(time(0));
-    while(deck.size())
+    int shuffleIndex;
+    while(tempDeck.size() > 0)
     {
-        int rnum = rand() % (deck.size() + 1);
-        deck.push_back(deck[rnum]);
-        deck.erase(deck.begin() + rnum);
+        shuffleIndex = rand() % tempDeck.size();
+        this -> deck.push((cardIndexes.at(tempDeck.at(shuffleIndex))));
+        tempDeck.erase(tempDeck.begin() + shuffleIndex);
     }
 }
 
@@ -36,7 +33,7 @@ void Player::draw()
 {
     if(!deck.empty())
     {
-        this->hand.push_back(deck.top());
+        this -> hand.push_back(deck.top());
         deck.pop();
     }
     else
@@ -64,18 +61,12 @@ int Player::get_HP()
     return this -> healthPoints;
 }
 
-std::vector<Card> Player::getHand()
+std::vector<Card*> Player::getHand()
 {
     return this -> hand;
 }
 
-std::vector<Card> Player::getBoard()
+std::vector<Card*> Player::getBoard()
 {
     return this -> board;
 }
-//};
-/*int main()
-{
-
-    return 0;
-}*/

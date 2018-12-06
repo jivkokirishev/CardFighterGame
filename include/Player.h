@@ -1,34 +1,36 @@
 #ifndef DECK_H
 #define DECK_H
 
-#include <vector>
 #include <stack>
-#include "Card.h"
+#include <string>
+#include <cstdlib>
+#include <ctime>
 
-using namespace std;
+#include "CardList.h"
+#include "DeckStructure.h"
 
 class Player{
-public:
-    Player();
-    virtual ~Player();
+    public:
+        Player();
+        virtual ~Player();
 
-    bool setHP(int value);
-    void set_name(string name);
-    void set_shuffle_deck(std::vector<Card> deck);
+        bool setHP(int);
+        void set_name(string);
+        void set_shuffle_deck(DeckStructure);
 
-    string get_name();
-    int get_HP();
-    std::vector<Card> getHand();
-    std::vector<Card> getBoard();
+        string get_name();
+        int get_HP();
+        vector<Card*> getHand();
+        vector<Card*> getBoard();
 
-    void draw();
+        void draw();
 
-private:
-    string name;
-    vector<Card> hand;
-    stack<Card> deck;
-    int healthPoints;
-    vector<Card> board;
+    private:
+        string name;
+        vector<Card*> hand;
+        vector<Card*> board;
+        stack<Card*> deck;
+        int healthPoints;
 };
 
 #endif
